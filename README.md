@@ -25,12 +25,12 @@
 | name              | string     | null: false                       |
 | prise             | integer    | null: false                       |
 | description       | text       | null: false                       |
-| category          | string     | null: false                       |
-| user_id           | references | null: false,foreign_key: true     | 
-| shipping_cost_id  | integer    | null: false,foreign_key: true     |
-| shipping_area_id  | integer    | null: false,foreign_key: true     |
-| shipping_day_id   | integer    | null: false,foreign_key: true     |
-| status_id         | integer    | null: false                       |
+| category_id       | integer    | null: false,foreign_key: true     |
+| user              | references | null: false,foreign_key: true     | 
+| shipping_cost_id  | integer    | null: false                       |
+| shipping_area_id  | integer    | null: false                       |
+| shipping_day_id   | integer    | null: false                       |
+| status            | text       | null: false                       |
 
 ### Association
 - belongs_to :user
@@ -44,22 +44,22 @@
 | item      | references | null: false, foreign_key: true |
 
 ### Association
-- has_one    :destinations
+- has_one    :destination
 - belongs_to :user
 - belongs_to :item
 
 
 ## destinationsテーブル
 
-| Column       | Type       | Options                        |
-| ------------ | ---------- | ------------------------------ |
-| post_code    | string     | null: false                    |
-| prefecture   | string     | null: false                    |
-| phone_number | integer    | null: false                    |
-| city         | string     | null: false                    |
-| address      | string     | null: false                    | 
-| building_name| string     |                                |
-| user         | references | null: false, foreign_key: true |
+| Column             | Type       | Options                        |
+| ------------       | ---------- | ------------------------------ |
+| post_code          | string     | null: false                    |
+| shipping_area_id   | integer    | null: false                    |
+| phone_number       | string     | null: false                    |
+| city               | string     | null: false                    |
+| address            | string     | null: false                    | 
+| building_name      | string     |                                |
+| user               | references | null: false, foreign_key: true |
 
 ### Association
 - belongs_to :purchase_recode
