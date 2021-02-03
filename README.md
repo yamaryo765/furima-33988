@@ -1,24 +1,64 @@
-# README
+# テーブル設計
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## usersテーブル
 
-Things you may want to cover:
+| Column          | Type   | Options                   |
+| ----------------| ------ | ------------------------- |
+| nickname        | string | null: false               |
+| email           | string | null: false, unique: true |
+| password        | string | null: false               |
+| birth_day       | date   | null: false               |
+| first_name      | string | null: false               |
+| first_name_kana | string | null: false               |
+| family_name     | string | null: false               |
+| family_name_kana| string | null: false               |
 
-* Ruby version
+### Association
+- has_many :items
+- has_many :purchase_recodes
 
-* System dependencies
 
-* Configuration
+## itemsテーブル
 
-* Database creation
+| Column         | Type       | Options                           |
+| -------------- | ---------- | --------------------------------- |
+| name           | string     | null: false                       |
+| prise          | string     | null: false                       |
+| description    | text       | null: false                       |
+| category       | string     | null: false                       |
+| user_id        | references | null: false,foreign_key: true     | 
+| image          | image      | null: false                       |
 
-* Database initialization
+### Association
+- belongs_to :user
+- has_many   :destinations
+- has_one    :purchase_recode
 
-* How to run the test suite
+## purchase_recordsテーブル
 
-* Services (job queues, cache servers, search engines, etc.)
+| Column    |    Type    | Options                        |
+| --------- | ---------- | ------------------------------ |
+| user_id   | references | null: false, foreign_key: true |
+| item_id   | references | null: false, foreign_key: true |
 
-* Deployment instructions
+### Association
+- has_many   :destinations
+- belongs_to :user
+- belongs_to :item
 
-* ...
+
+## destinationsテーブル
+
+| Column       | Type       | Options                        |
+| ------------ | ---------- | ------------------------------ |
+| post_code    | string     | null: false                    |
+| prefecture   | string     | null: false                    |
+| phone_number | references | null: false                    |
+| city         | string     | null: false                    |
+| address      | string     | null: false                    | 
+| building_name| string     | null: false                    |
+| user_id      | integer    | null: false, foreign_key: true |
+
+### Association
+- belongs_to :purchase_recode
+- belongs_to :item
