@@ -15,7 +15,7 @@
 
 ### Association
 - has_many :items
-- has_many :purchase_recodes
+- has_many :purchase_records
 
 
 ## itemsテーブル
@@ -23,18 +23,18 @@
 | Column            | Type       | Options                           |
 | --------------    | ---------- | --------------------------------- |
 | name              | string     | null: false                       |
-| prise             | integer    | null: false                       |
+| price             | integer    | null: false                       |
 | description       | text       | null: false                       |
-| category_id       | integer    | null: false,foreign_key: true     |
+| category_id       | integer    | null: false                       |
 | user              | references | null: false,foreign_key: true     | 
 | shipping_cost_id  | integer    | null: false                       |
 | shipping_area_id  | integer    | null: false                       |
 | shipping_day_id   | integer    | null: false                       |
-| status            | text       | null: false                       |
+| status_id         | integer    | null: false                       |
 
 ### Association
 - belongs_to :user
-- has_one    :purchase_recode
+- has_one    :purchase_record
 
 ## purchase_recordsテーブル
 
@@ -62,4 +62,4 @@
 | user               | references | null: false, foreign_key: true |
 
 ### Association
-- belongs_to :purchase_recode
+- belongs_to :purchase_record
