@@ -59,7 +59,7 @@
 | city               | string     | null: false                    |
 | address            | string     | null: false                    | 
 | building_name      | string     |                                |
-| purchase_record   | references | null: false, foreign_key: true |
+| purchase_record    | references | null: false, foreign_key: true |
 
 ### Association
 - belongs_to :purchase_record
