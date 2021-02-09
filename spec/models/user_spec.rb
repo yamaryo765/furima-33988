@@ -2,11 +2,11 @@ require 'rails_helper'
 
 RSpec.describe User, type: :model do
   describe 'ユーザー新規登録' do
-
     before do
       @user = FactoryBot.build(:user)
     end
-    it "全ての項目が正しく入力されていれば登録できること" do  
+      
+    it "全ての項目が正しく入力されていれば登録できること" do
       expect(@user).to be_valid
     end
     it 'nicknameが空では登録できないこと' do
@@ -20,9 +20,16 @@ RSpec.describe User, type: :model do
       expect(@user.errors.full_messages).to include("Email can't be blank")
     end     
     it 'emailに＠がないと登録できないこと' do
-    @user.email = 'exsamplegmail.com'
-    @user.valid?
-    expect(@user.errors.full_messages).to include("Email is invalid")
+      @user.email = 'exsamplegmail.com'
+      @user.valid?
+      expect(@user.errors.full_messages).to include("Email is invalid")
+    end
+    it "重複したemailが存在する場合登録できない" do #ユーザー登録pull修正１(追記)一意性の検証
+      @user.save
+      another_user = FactoryBot.build(:user)
+      another_user.email = @user.email
+      another_user.valid?
+      expect(another_user.errors.full_messages).to include("Email has already been taken")
     end
     it 'passwordが空では登録できないこと' do
       @user.password = ''
@@ -30,9 +37,19 @@ RSpec.describe User, type: :model do
       expect(@user.errors.full_messages).to include("Password can't be blank")
     end
     it 'psaawordは６文字以上でないと登録できない'do
-    @user.password = "123as"
-    @user.valid?
-    expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password","Password is too short (minimum is 6 characters)")
+      @user.password = "123as"
+      @user.valid?
+      expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password","Password is too short (minimum is 6 characters)")
+    end 
+    it "passwordは英字のみでは登録できない" do #ユーザー登録pull修正１(追記)
+      @user.password = "abcdefg"
+      @user.valid?
+      expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
+    end
+    it "passwordは数字のみでは登録できない" do #ユーザー登録pull修正１(追記)
+      @user.password = "123456"
+      @user.valid?
+      expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
     end
     it "password_confirmationが空では登録できない" do
       @user.password_confirmation = ''
