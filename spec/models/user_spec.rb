@@ -6,7 +6,7 @@ RSpec.describe User, type: :model do
     before do
       @user = FactoryBot.build(:user)
     end
-    it "全ての項目が正しく入力されていれば登録できること" do  # 変数userにbuildメソッドを使用して、factory_botのダミーデータを代入
+    it "全ての項目が正しく入力されていれば登録できること" do  
       expect(@user).to be_valid
     end
     it 'nicknameが空では登録できないこと' do
