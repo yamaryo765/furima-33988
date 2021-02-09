@@ -12,8 +12,8 @@ RSpec.describe User, type: :model do
     context "新規登録できないとき" do
       it 'nicknameが空では登録できないこと' do
         @user.nickname = ''
-        @user.valid?
-        expect(@user.errors.full_messages).to  include("Nickname can't be blank")
+        @user.valid? #trueかfalseを調べる
+        expect(@user.errors.full_messages).to  include("Nickname can't be blank")#エラー文
       end
       it 'emailが空では登録できないこと' do
         @user.email = ''
@@ -25,7 +25,7 @@ RSpec.describe User, type: :model do
         @user.valid?
         expect(@user.errors.full_messages).to include("Email is invalid")
       end
-      it "重複したemailが存在する場合登録できない" do #ユーザー登録pull修正１(追記)一意性の検証
+      it "重複したemailが存在する場合登録できない" do 
         @user.save
         another_user = FactoryBot.build(:user)
         another_user.email = @user.email
@@ -42,23 +42,23 @@ RSpec.describe User, type: :model do
         @user.valid?
         expect(@user.errors.full_messages).to include("Password is too short (minimum is 6 characters)")
       end 
-      it "passwordは英字のみでは登録できない" do #ユーザー登録pull修正
+      it "passwordは英字のみでは登録できない" do 
         @user.password = "abcdefg"
         @user.valid?
         expect(@user.errors.full_messages).to include("Password is invalid")
       end
-      it "passwordは数字のみでは登録できない" do #ユーザー登録pull修正
+      it "passwordは数字のみでは登録できない" do 
         @user.password = "123456"
         @user.valid?
         expect(@user.errors.full_messages).to include("Password is invalid")
       end
-      it "passwordは全角では登録できない" do #ユーザー登録pull修正
+      it "passwordは全角では登録できない" do
         @user.password = "１２３４５A"
         @user.valid?
         expect(@user.errors.full_messages).to include("Password is invalid")
       end
       it "passwordは半角英数字混合でなければ登録できない" do
-        @user.password = "123456"
+        @user.password = "765283"
         @user.valid?
         expect(@user.errors.full_messages).to include("Password is invalid")
       end
