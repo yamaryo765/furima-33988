@@ -37,6 +37,11 @@ ActiveRecord::Schema.define(version: 2021_02_10_033035) do
     t.string "name", null: false
     t.integer "price", null: false
     t.text "description", null: false
+    t.integer "category_id", null: false
+    t.integer "shipping_cost_id", null: false
+    t.integer "shipping_area_id", null: false
+    t.integer "shipping_day_id", null: false
+    t.integer "status_id", null: false
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -62,4 +67,5 @@ ActiveRecord::Schema.define(version: 2021_02_10_033035) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "items", "users"
 end

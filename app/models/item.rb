@@ -2,12 +2,12 @@ class Item < ApplicationRecord
   belongs_to :user
   has_one_attached :image
 
-  with_options presence: true do
-    validates :name
-    validates :price
-    validates :description
-    validates :user,      foreign_key: true
-  end
+  
+    validates :name,null: false
+    validates :price,null: false
+    validates :description, null: false
+    validates :user,   null: false
+  
 
 
   extend ActiveHash::Associations::ActiveRecordExtensions
