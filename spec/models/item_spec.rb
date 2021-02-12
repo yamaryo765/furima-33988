@@ -10,6 +10,11 @@ RSpec.describe Item, type: :model do
       end
     end
     context "出品できないとき" do
+      it  "商品画像がないと出品できない" do
+        @item.image = nil
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Image can't be blank")
+      end
       it "商品名が空だと出品できない" do
         @item.name = ''
         @item.valid?
@@ -24,6 +29,11 @@ RSpec.describe Item, type: :model do
         @item.price = ''
         @item.valid?
         expect(@item.errors.full_messages).to include("Price can't be blank")
+      end
+      it "商品の値段は半角数字でなければ出品できない" do
+        @item.price = 'gosenen'
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Price is not a number")
       end
       it "カテゴリが決められていなければ出品できない" do
         @item.category_id = ''
