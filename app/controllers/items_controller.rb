@@ -1,6 +1,7 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!, except: [:index,:show]
   before_action :private_method,only: [:show,:edit,:update]
+  before_action :private_method2,only:[:edit,:update]
   def index
     @items = Item.order("created_at DESC")
   end
@@ -29,8 +30,7 @@ class ItemsController < ApplicationController
   end
   def update
     
-    if @item.user_id == current_user.id && 
-        @item.update(item_params)
+    if @item.update(item_params)
         redirect_to action: :show
     else 
       item = Item.find(params[:id])
@@ -44,5 +44,8 @@ class ItemsController < ApplicationController
   end
   def private_method
     @item = Item.find(params[:id])
+  end
+  def private_method2
+    @item.user_id == current_user.id 
   end
 end
