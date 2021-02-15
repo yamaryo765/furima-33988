@@ -29,7 +29,7 @@ class ItemsController < ApplicationController
   end
   def update
     if @item.user_id == current_user.id
-      item.update(item_params)
+      @item.update(item_params)
       redirect_to action: :show
     else 
       render :edit
