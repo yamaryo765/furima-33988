@@ -1,10 +1,7 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!, except: [:index,:show]
-
   before_action :private_method,only: [:show,:edit,:update,:destroy]
   before_action :private_method2,only:[:edit,:update,:destroy]
-
-
 
 
   def index
@@ -39,15 +36,10 @@ class ItemsController < ApplicationController
   end
 
   def destroy
-    
     if @item.destroy
       redirect_to root_path
     end
   end
-
-
-
-
 
   private
 
