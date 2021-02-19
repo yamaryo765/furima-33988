@@ -1,5 +1,5 @@
 require 'rails_helper'
 
-RSpec.describe "PurchaseRecords", type: :request do
+RSpec.describe "PurchaseRecordsDestination", type: :request do
 
 end
