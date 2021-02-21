@@ -32,8 +32,6 @@
           <%= link_to "購入画面に進む", item_purchase_records_path(@item.id) ,class:"item-red-btn"%>
         <% end %> 
       <% end %>
-    <% unless current_user == @item.user_id %>
-
     <div class="item-explain-box">
       <span><%= @item.description %></span>
     </div>
