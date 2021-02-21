@@ -1,2 +1,0 @@
-class PhacaseRecord < ApplicationRecord
-end
