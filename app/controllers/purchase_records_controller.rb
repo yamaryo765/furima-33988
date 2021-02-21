@@ -3,7 +3,7 @@ class PurchaseRecordsController < ApplicationController
   before_action :private_method3,only: [:index,:create]
   def index
     @purchase_record = PurchaseRecordsDestination.new
-    if  current_user == @item.user
+    if current_user == @item.user 
       redirect_to root_path
     end
   end
