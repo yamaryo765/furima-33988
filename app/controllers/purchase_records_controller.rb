@@ -1,15 +1,14 @@
 class PurchaseRecordsController < ApplicationController
+  before_action :authenticate_user!, only: [:index,:create]
+  before_action :private_method3,only: [:index,:create]
   def index
-    @item = Item.find(params[:item_id])
     @purchase_record = PurchaseRecordsDestination.new
-    
-    if @purchase_record.save[:item_id]
+    if  current_user == @item.user
       redirect_to root_path
     end
   end
 
   def create
-    @item = Item.find(params[:item_id])
     @purchase_record =  PurchaseRecordsDestination.new(purchase_records_params)
     if @purchase_record.valid?
       pay_item
@@ -23,6 +22,10 @@ class PurchaseRecordsController < ApplicationController
 
   def purchase_records_params
     params.permit(:post_code, :shipping_area_id, :city, :address, :building_name, :phone_number,:item_id,:token).merge(user_id: current_user.id,token: params[:token])
+  end
+
+  def private_method3
+    @item = Item.find(params[:item_id])
   end
 
   def pay_item
