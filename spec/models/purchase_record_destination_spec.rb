@@ -7,7 +7,11 @@ RSpec.describe PurchaseRecordsDestination, type: :model do
       @purchase_record = FactoryBot.build(:purchase_records_destination,user_id:user.id,item_id:item.id)
     end
     context  "購入できるとき" do
-      it  "全ての項目が正しく入力されていれば登録できること" do
+      it  "全ての項目が正しく入力されていれば購入できること" do
+        expect(@purchase_record).to be_valid
+      end
+      it "建物名がなくても他項目が正しく入力されていれば購入できること" do
+        @purchase_record.building_name = ''
         expect(@purchase_record).to be_valid
       end
     end

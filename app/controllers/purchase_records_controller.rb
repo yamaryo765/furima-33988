@@ -1,9 +1,9 @@
 class PurchaseRecordsController < ApplicationController
   before_action :authenticate_user!, only: [:index,:create]
-  before_action :private_method3,only: [:index,:create]
+  before_action :find,only: [:index,:create]
   def index
     @purchase_record = PurchaseRecordsDestination.new
-    if current_user == @item.user 
+    if current_user == @item.user || @item.purchase_record.presence
       redirect_to root_path
     end
   end
@@ -24,12 +24,12 @@ class PurchaseRecordsController < ApplicationController
     params.permit(:post_code, :shipping_area_id, :city, :address, :building_name, :phone_number,:item_id,:token).merge(user_id: current_user.id,token: params[:token])
   end
 
-  def private_method3
+  def find
     @item = Item.find(params[:item_id])
   end
 
   def pay_item
-    Payjp.api_key = ENV["PAYJP_SECRET_KEY"]  # 自身のPAY.JPテスト秘密鍵を記述しましょう
+    Payjp.api_key = ENV["PAYJP_SECRET_KEY"]  
       Payjp::Charge.create(
         amount: @item.price,  # 商品の値段
         card: @purchase_record.token,    # カードトークン

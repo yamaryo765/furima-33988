@@ -23,23 +23,15 @@
       </span>
     </div>
 
-    <% if current_user == @item.user && @item.purchase_record.nil? %>
-
-    <%= link_to "商品の編集", edit_item_path, method: :get, class: "item-red-btn" %>
-    <p class="or-text">or</p>
-    <%= link_to "削除",item_path(@item.id), method: :delete, class:"item-destroy" %>
-
-    <%end%>
-  
-        
-   
-
-    <% unless @item.purchase_record.present? %>
-      <%= link_to "購入画面に進む", item_purchase_records_path(@item.id) ,class:"item-red-btn"%>
-    <% end %>
-    
-
-
+    <% if current_user  && @item.purchase_record.nil? %>
+        <% if current_user == @item.user  %>
+          <%= link_to "商品の編集", edit_item_path, method: :get, class: "item-red-btn" %>
+            <p class="or-text">or</p>
+          <%= link_to "削除",item_path(@item.id), method: :delete, class:"item-destroy" %>
+        <% else %>
+          <%= link_to "購入画面に進む", item_purchase_records_path(@item.id) ,class:"item-red-btn"%>
+        <% end %> 
+      <% end %>
     <% unless current_user == @item.user_id %>
 
     <div class="item-explain-box">

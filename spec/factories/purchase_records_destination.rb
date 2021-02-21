@@ -7,8 +7,5 @@ FactoryBot.define do
     address {"青山1-1-1"}
     building_name {"ポレポレ"}
     token  {"tok_abcdefghijk00000000000000000"}
-    
-
-    
   end
 end
