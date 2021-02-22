@@ -7,7 +7,6 @@ class PurchaseRecordsController < ApplicationController
       redirect_to root_path
     end
   end
-
   def create
     @purchase_record =  PurchaseRecordsDestination.new(purchase_records_params)
     if @purchase_record.valid?
