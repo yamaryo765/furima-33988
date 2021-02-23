@@ -89,6 +89,11 @@
       </button>
     </form>
   </div>
+  <% @messages.each do |message| %>
+    <li>
+      <%= message.text %>
+    </li>
+  <% end %>
   <div class="links">
     <a href="#" class="change-item-btn">
       ＜ 前の商品
