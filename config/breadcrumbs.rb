@@ -22,7 +22,10 @@ crumb :index do |item|
   parent :show,item
 end
 
-
+crumb :edit do |item|
+  link "商品編集ページ", edit_item_path(item)
+  parent :show,item
+end
 
 # crumb :projects do   
 #   link "Projects", projects_path
