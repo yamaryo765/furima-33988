@@ -16,6 +16,10 @@ crumb :show do |item|
   parent :root                           #B 親にidを使う時もカンマで区切って、ブロック変数を書く、ビューにもカンマで区切り、インスタンス変数を書く
 end
 
+crumb :new do
+  link "商品出品ページ", new_item_path
+  parent :root
+end
 
 crumb :index do |item|
   link "商品購入ページ", item_purchase_records_path(item)

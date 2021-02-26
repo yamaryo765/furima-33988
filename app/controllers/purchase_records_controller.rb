@@ -1,12 +1,14 @@
 class PurchaseRecordsController < ApplicationController
   before_action :authenticate_user!, only: [:index,:create]
   before_action :find,only: [:index,:create]
+
   def index
     @purchase_record = PurchaseRecordsDestination.new
     if current_user == @item.user || @item.purchase_record.presence
       redirect_to root_path
     end
   end
+  
   def create
     @purchase_record =  PurchaseRecordsDestination.new(purchase_records_params)
     if @purchase_record.valid?
