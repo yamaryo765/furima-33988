@@ -1,5 +1,5 @@
 crumb :root do
-  link "トップページ", root_path
+  link "トップページへ戻る", root_path
 end
 
 crumb :user do
