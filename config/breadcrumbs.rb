@@ -7,7 +7,7 @@ crumb :user do
   parent :root
 end
 
-crumb :new do
+crumb :user do
   link "新規登録ページ", new_user_registration_path
 end
 
