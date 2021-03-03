@@ -20,3 +20,17 @@
 .purchase-btn-icon {
   width: 60%;
 }
+
+@media (max-width: 1024px){
+  
+  .purchase-btn-text {
+    color: #fff;
+    display: block;
+    font-size: 20px;
+    text-decoration: none;
+    margin-bottom: 5px;
+  }
+  .purchase-btn-icon {
+    width: 70%;
+  }
+}
