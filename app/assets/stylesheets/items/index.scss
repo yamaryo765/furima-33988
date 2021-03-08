@@ -324,3 +324,20 @@ a {
   }
   
 }
+@media (max-width: 414px){
+  .store-btn {
+    display: flex;
+    margin-top: 24px;
+  }
+  .apple-btn {
+    width:100%;
+    max-width: 100%;
+    height: auto;
+  }
+  
+  .google-btn {
+    width:100%;
+    max-width: 100%;
+    height: auto;
+  }
+}
